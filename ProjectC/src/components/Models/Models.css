@@ -1,0 +1,37 @@
+.modelBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    height: 25px;
+    flex-basis: 18%;
+    max-width: 18%;
+    margin: 0 1% 15px 1%;
+    box-sizing: border-box;
+    border: 2px solid #ffffff80;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+  
+.modelBtn:hover{
+    background-color: var(--background-color);
+    border: 2px solid white;
+}
+
+.modelBtn:hover span{
+    color: #acb262;
+}
+  
+.modelBtn.active{
+    background-color: var(--background-color);
+    border-color: white;
+}
+  
+.modelBtn span{
+    display: flex;
+    color: white;
+    font-family: var(--primary-font);
+    justify-content: center;
+    transition: 0.3s ease;
+}

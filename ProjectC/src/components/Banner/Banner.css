@@ -1,0 +1,30 @@
+.bannerDiv{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 550px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.0)),
+    url('/IMG_20241006_114018.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.bannerTextDiv{
+    position: absolute;
+    right: 0;
+    margin-top: 250px;
+    margin-right: 100px;
+    width: 350px;
+    height: 100px;
+    white-space: normal;
+}
+
+  .bannerText{
+    color: white;
+    font-size: x-large;
+    font-family: var(--primary-font);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 30px;
+}

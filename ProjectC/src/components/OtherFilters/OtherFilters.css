@@ -1,0 +1,42 @@
+.otherFiltersPartDiv{
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    flex-wrap: wrap;
+    width: 23%;
+    margin: 0 1% 15px 1%;
+    box-sizing: border-box;
+    border-bottom: 2px solid #ffffff80;
+    border-radius: 20px;
+    transition: 0.3s ease;
+    padding: 20px 20px 20px 20px;
+    gap: 1px;
+}
+
+.otherFiltersPartDiv:hover{
+    border-color: #acb262;
+}
+
+.filterRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+}
+  
+.filterRow span{
+    width: 100%;
+    color: white;
+    font-family: var(--primary-font);
+    padding-left: 15px;
+    font-size: 14px;
+}
+  
+.filterRow div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+}

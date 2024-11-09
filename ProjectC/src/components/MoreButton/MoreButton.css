@@ -1,0 +1,10 @@
+.showMoreBtn{
+    fill: rgba(255, 255, 255, 0.5);
+    transition: 0.2s;
+    cursor: pointer;
+}
+  
+.showMoreBtn:hover{
+    fill: rgb(172, 178, 98);
+    filter: drop-shadow(0px 0px 20px rgb(248, 251, 96));
+}

@@ -1,0 +1,41 @@
+.counterDiv{
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    width: 430px;
+    display: flex;
+    margin-top: 65px;
+    margin-bottom: 200px;
+}
+
+.counterSpanDiv{
+    color: rgba(255, 255, 255, 0.5);
+    align-items: end;
+    font-style: italic;
+    font-family: var(--primary-font);
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.7);
+    font-size: 34px;
+    text-wrap: wrap;
+    margin-top: 20px;
+    transition: 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.counterDiv:hover .counterSpanDiv{
+    color: #adb262f0;
+    filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 0.5));
+    text-shadow: 0px 0px 20px hsla(64, 34%, 54%, 0.4);
+}
+
+.arrowSvg{
+    fill: rgba(255, 255, 255, 0.5);
+    transition: 0.3s ease;
+}
+
+.counterDiv:hover .arrowSvg{
+    fill: rgb(172, 178, 98);
+    filter: drop-shadow(0px 0px 20px rgb(248, 251, 96));
+}

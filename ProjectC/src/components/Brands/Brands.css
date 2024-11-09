@@ -1,0 +1,47 @@
+.brandBtn{
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    cursor: pointer;
+    flex-direction: row;
+    padding-right: 2%;
+    padding-left: 3%;
+    align-items: center;
+    flex-basis: 18%;
+    max-width: 18%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 13px;
+    margin: 0 1% 0 1%;
+    box-sizing: border-box;
+    transition: 0.3s ease;
+}
+  
+.brandBtn:hover{
+    background-color: var(--background-color);
+    border: 2px solid white;
+}
+
+.brandBtn:hover span{
+    color: #acb262;
+}
+  
+.brandBtn.active{
+    background-color: var(--background-color);
+    border-color: white;
+}
+  
+.brandBtn img{
+    width: auto;
+    height: 60%;
+    background-color: transparent;
+    transition: 0.3s ease;
+    color: white;
+}
+  
+.brandBtn span{
+    display: flex;
+    color: white;
+    font-family: var(--primary-font);
+    justify-content: center;
+    transition: 0.3s ease;
+}

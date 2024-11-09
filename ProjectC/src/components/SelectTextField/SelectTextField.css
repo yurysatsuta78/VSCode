@@ -1,0 +1,10 @@
+.css-1toxriw-MuiList-root-MuiMenu-list{
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: black;
+}
+
+.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+    background-color: transparent;
+    max-height: 120px;
+}

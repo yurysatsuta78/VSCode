@@ -1,0 +1,117 @@
+.carBtn{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 55%;
+    height: 220px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    border-radius: 20px;
+    transition: 0.3s ease;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.carBtn:hover{
+    border: 2px solid white;
+}
+  
+.carBtnImgDiv{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+  
+.carBtnImgDiv::before,
+.carBtnImgDiv::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      pointer-events: none;
+}
+  
+.carBtnImgDiv::before {
+      left: 0;
+      background: linear-gradient(to right, black 25%, rgba(0, 0, 0, 0) 80%);
+}
+  
+.carBtnImgDiv::after {
+      right: 0;
+      background: linear-gradient(to left, black 25%, rgba(0, 0, 0, 0) 80%);
+}
+  
+.carBtnImgDiv img{
+    object-fit: cover;
+    width: 80%;
+    height: 100%;
+    color: white;
+    user-select: none;
+}
+  
+.carBtnBG{
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+    z-index: 10;
+}
+  
+.carBtnInfo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+  
+.carBtnInfo div{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+  
+.carBtnSpan{  
+    text-align: start;
+    color: white;
+    font-family: var(--primary-font);
+    font-size: 20px;
+    user-select: none;
+}
+
+.loadCarsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.loadCarsBtn{
+    height: 40px;
+    width: 25%;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-family: var(--primary-font);
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.3s ease;
+} 
+  
+.loadCarsBtn:hover{
+    background-color: var(--background-color);
+    border-color: white;
+    color: #acb262;
+}
