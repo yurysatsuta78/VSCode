@@ -1,26 +1,15 @@
 import PropTypes from "prop-types";
-import { getFiltredCars } from "../../services/cars";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import './Cars.css'
 import CarPopup from "../CarPopup/CarPopup";
+import { FilterContext } from "../../contexts/FilterContext/FilterProvider";
+import { DataContext } from "../../contexts/DataContext/DataProvider";
 
-function Cars({ carsAmount, filters, serverUrl, enableAnimations }) {
-const [cars, setCars] = useState([]);
+function Cars({ enableAnimations }) {
 const [selectedCar, setSelectedCar] = useState(null);
-const skipRef = useRef(0);
-
-const TAKE = 1;
-
-const getDeclension = (carsAmount) => {
-    if (carsAmount === 1) {
-        return 'объявление';
-    } else if (carsAmount >= 2 && carsAmount <= 4) {
-        return 'объявления';
-    } else {
-        return 'объявлений';
-    }
-}
+const { SERVER_URL, filtersRef, increaseSkip } = useContext(FilterContext);
+const { fetchMoreCars, cars } = useContext(DataContext);
 
 const handlePopup = (car) => {
     setSelectedCar(car);
@@ -30,24 +19,27 @@ const handleClosePopup = () => {
     setSelectedCar(null);
 }
 
-useEffect(() => {
-    skipRef.current = 0;
-    setCars([]);
-},[filters]);
-
-const getCars = async () => {
-    const CARS_FROM_BACKEND = await getFiltredCars(filters, skipRef.current, TAKE);
-    setCars(prevCars => [...prevCars, ...CARS_FROM_BACKEND]);
-    if(cars.count !== 0){
-        skipRef.current = skipRef.current + TAKE;
-    }
+const getMore = async () => {
+    await fetchMoreCars(filtersRef.current);
+    increaseSkip();
 }
 
-    return(
-        <div className="filterPartDiv" style={{ marginTop: 40 }}>
-            <span style={{ borderWidth: 0, textAlign: 'center', fontSize: 27 }} className="rightTitle">{`Найдено ${carsAmount} ${getDeclension(carsAmount)}`}</span>
-            {
-                cars.map((car, index) => (
+    if(cars.length === 0) return(
+        <div id="carsFilterPart" className="filterPartDiv" style={{ marginTop: 40 }}>
+            <span style={{ textAlign: 'center', fontSize: 27, width: '100%', marginBottom: '50px' }} className="rightTitle">Объявления</span>
+            <button className="emptyCarBtn">Пусто</button>
+            <button className="emptyCarBtn">Пусто</button>
+            <button className="emptyCarBtn">Пусто</button>
+            <button className="emptyCarBtn">Пусто</button>
+            <button className="emptyCarBtn">Пусто</button>
+            <span style={{ width: '100%' }} className="rightTitle"></span>
+        </div>
+    )
+
+    if(cars.length !== 0) return(
+        <div id="carsFilterPart" className="filterPartDiv" style={{ marginTop: 40 }}>
+            <span style={{ textAlign: 'center', fontSize: 27, width: '100%', marginBottom: '50px' }} className="rightTitle">Объявления</span>
+            {cars.map((car, index) => (
                     <motion.button 
                     whileHover={ enableAnimations ? { scale: 1.02 } : { scale: 1 }} 
                     whileTap={ enableAnimations ? { scale: 0.97 } : { scale: 1 }} 
@@ -69,15 +61,16 @@ const getCars = async () => {
                             </div>
                         </motion.div>
                         <div className="carBtnImgDiv">
-                            <img src={`${serverUrl}${car.images[0].imageUrl}`} alt={car.carId} ></img>
+                            <img src={`${SERVER_URL}${car.images[0].imageUrl}`} alt={car.carId} ></img>
                         </div>
                     </motion.button>
                 ))
             }
             <div className="loadCarsDiv">
-                <button onClick={() => getCars()} className="loadCarsBtn">{`${cars.length !== 0 ? `Показать еще` : `Показать`}`}</button>
+                <button onClick={() => getMore()} className="loadCarsBtn">Показать еще</button>
             </div>
-            <CarPopup selectedCar={selectedCar} serverUrl={serverUrl} handleClosePopup={handleClosePopup} />
+            <span style={{ width: '100%' }} className="rightTitle"></span>
+            <CarPopup selectedCar={selectedCar} handleClosePopup={handleClosePopup} />
         </div>
     );
 }
@@ -85,8 +78,6 @@ const getCars = async () => {
 export default Cars;
 
 Cars.propTypes = {
-    filters: PropTypes.object.isRequired,
     carsAmount: PropTypes.number,
-    serverUrl: PropTypes.string.isRequired,
     enableAnimations: PropTypes.bool.isRequired,
 };

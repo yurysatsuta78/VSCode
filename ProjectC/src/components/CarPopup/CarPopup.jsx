@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from "prop-types";
 import './CarPopup.css';
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
+import { FilterContext } from '../../contexts/FilterContext/FilterProvider';
 
-function CarPopup({ selectedCar, handleClosePopup, serverUrl }) {
+function CarPopup({ selectedCar, handleClosePopup }) {
 const [isVisible, setIsVisible] = useState(false);
+const { SERVER_URL } = useContext(FilterContext);
 
 useEffect(() => {
     if (selectedCar) {
@@ -22,6 +24,8 @@ const handleClose = () => {
     setTimeout(handleClosePopup, 230);
 };
 
+console.log("CarPopup_rendered");
+
     if(!selectedCar) return null;
 
     return (
@@ -29,7 +33,7 @@ const handleClose = () => {
           <div className="modal-container">
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div style={{ width: '60%', height: '60%' }} className="modal-content-part">
-                  <ImageCarousel serverUrl={serverUrl} images={selectedCar.images} />
+                  <ImageCarousel serverUrl={SERVER_URL} images={selectedCar.images} />
                 </div>
                 <div style={{ width: '40%', height: '60%' }} className="modal-content-part">
                   <div className="carInfo">

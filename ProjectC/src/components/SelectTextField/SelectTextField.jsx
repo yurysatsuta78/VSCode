@@ -3,6 +3,8 @@ import { TextField, MenuItem } from '@mui/material';
 import './SelectTextField.css';
 import PropTypes from "prop-types";
 
+function SelectTextField({ label, id, htmlFor, list, onChange, maxWidth }) {
+
 const DarkMenuItem = styled(MenuItem)(() => ({
     backgroundColor: '#212122 !important',
     color: '#fff',
@@ -22,11 +24,9 @@ const FilterSelectTextField = styled(TextField)(() => ({
     '& .MuiInputBase-input': { color: '#ffffff', fontFamily: 'Oswald, sans-serif' },
 }));
 
-function SelectTextField({ label, value, id, htmlFor, list, onChange, maxWidth }) {
-
     return (
         <FilterSelectTextField
-        value={value}
+        defaultValue={""}
         sx={{ maxWidth }}
         InputProps={{ id }}
         InputLabelProps={{ htmlFor }}
@@ -48,12 +48,11 @@ export default SelectTextField;
 
 SelectTextField.propTypes = {
     label: PropTypes.string, 
-    value: PropTypes.string, 
     id: PropTypes.string, 
     htmlFor: PropTypes.string, 
     list: PropTypes.arrayOf(
         PropTypes.string,
     ), 
     onChange: PropTypes.func, 
-    maxWidth: PropTypes.number,
+    maxWidth: PropTypes.string,
 }

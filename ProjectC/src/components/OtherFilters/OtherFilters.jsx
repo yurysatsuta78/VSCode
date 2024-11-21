@@ -3,6 +3,9 @@ import './OtherFilters.css'
 import SelectTextField from "../SelectTextField/SelectTextField";
 import CheckBox from "../CheckBox/CheckBox";
 import CustomTextField from "../CustomTextField/CustomTextField";
+import { useContext } from "react";
+import { FilterContext } from "../../contexts/FilterContext/FilterProvider";
+
 
 const allowedTransmissionTypes = [
     'Автомат',
@@ -94,10 +97,19 @@ const allowedRegistrationCountries = [
     'Другая страна'
 ];
 
-function OtherFilters({ filters, setFilters }) {
+function OtherFilters () {
+const { setFilters } = useContext(FilterContext);
 
 const OTHER_FILTER_PART_WIDTH = '23%';
 const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
+
+const handleFilterChange = (field) => (e) => {
+    setFilters(field, e.target.value);
+};
+
+const handleCheckBoxFilterChange = (field) => (e) => {
+    setFilters(field, e.target.checked);
+}
 
     return (
         <div className="filterPartDiv">
@@ -107,25 +119,25 @@ const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Характеристика</span>
                     </div>
-                    <SelectTextField label={"Коробка передач"} value={filters.transmissionType} id={"transmission-type-input"} htmlFor={"transmission-type-input"} list={allowedTransmissionTypes} onChange={(e) => setFilters({ ...filters, transmissionType: e.target.value })} />
-                    <SelectTextField label={"Кузов"} value={filters.bodyType} id={"body-type-input"} htmlFor={"body-type-input"} list={allowedBodyTypes} onChange={(e) => setFilters({ ...filters, bodyType: e.target.value })} />
-                    <SelectTextField label={"Тип двигателя"} value={filters.engineType} id={"engine-type-input"} htmlFor={"engine-type-input"} list={allowedEngineTypes} onChange={(e) => setFilters({ ...filters, engineType: e.target.value })} />
-                    <SelectTextField label={"Привод"} value={filters.driveTrain} id={"drive-train-input"} htmlFor={"drive-train-input"} list={allowedDriveTrains} onChange={(e) => setFilters({ ...filters, driveTrain: e.target.value })} />
+                    <SelectTextField label={"Коробка передач"} id={"transmission-type-input"} htmlFor={"transmission-type-input"} list={allowedTransmissionTypes} onChange={handleFilterChange('transmissionType')} />
+                    <SelectTextField label={"Кузов"} id={"body-type-input"} htmlFor={"body-type-input"} list={allowedBodyTypes} onChange={handleFilterChange('bodyType')} />
+                    <SelectTextField label={"Тип двигателя"} id={"engine-type-input"} htmlFor={"engine-type-input"} list={allowedEngineTypes} onChange={handleFilterChange('engineType')} />
+                    <SelectTextField label={"Привод"} id={"drive-train-input"} htmlFor={"drive-train-input"} list={allowedDriveTrains} onChange={handleFilterChange('driveTrain')} />
                 </div>
                 <div style={{ width: WIDE_OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Внешний вид</span>
                     </div>
-                    <SelectTextField label={"Цвет кузова"} value={filters.color} id={"color-input"} htmlFor={"color-input"} list={allowedColors} onChange={(e) => setFilters({ ...filters, color: e.target.value })} />
-                    <SelectTextField label={"Цвет салона"} value={filters.interiorColor} id={"interior-color-input"} htmlFor={"interior-color-input"} list={allowedInteriorColors} onChange={(e) => setFilters({ ...filters, interiorColor: e.target.value })} />
-                    <SelectTextField label={"Материал салона"} value={filters.interiorMaterial} id={"interior-material-input"} htmlFor={"interior-material-input"} list={allowedInteriorMaterials} onChange={(e) => setFilters({ ...filters, interiorMaterial: e.target.value })} />
+                    <SelectTextField label={"Цвет кузова"} id={"color-input"} htmlFor={"color-input"} list={allowedColors} onChange={handleFilterChange('color')} />
+                    <SelectTextField label={"Цвет салона"} id={"interior-color-input"} htmlFor={"interior-color-input"} list={allowedInteriorColors} onChange={handleFilterChange('interiorColor')} />
+                    <SelectTextField label={"Материал салона"} id={"interior-material-input"} htmlFor={"interior-material-input"} list={allowedInteriorMaterials} onChange={handleFilterChange('interiorMaterial')} />
                 </div>
                 <div className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Регистрация</span>
                     </div>
-                    <CheckBox label={"Снят с учёта"} id={"is-registred-check"} checked={filters.isRegistred} onChange={(e) => setFilters({ ...filters, isRegistred: e.target.checked })} />
-                    <SelectTextField label={"Страна регистрации"} value={filters.registrationCountry} id={"registration-country-input"} htmlFor={"registration-country-input"} list={allowedRegistrationCountries} onChange={(e) => setFilters({ ...filters, registrationCountry: e.target.value })} />
+                    <CheckBox label={"Снят с учёта"} id={"is-registred-check"} onChange={handleCheckBoxFilterChange('isRegistred')} />
+                    <SelectTextField label={"Страна регистрации"} id={"registration-country-input"} htmlFor={"registration-country-input"} list={allowedRegistrationCountries} onChange={handleFilterChange('registrationCountry')} />
                 </div>
                 <div className="otherFiltersPartDiv">
                     <div className="filterRow">
@@ -134,61 +146,61 @@ const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
                     <div className="filterRow">
                         <span>Пробег</span>
                         <div>
-                            <CustomTextField label={"От"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.minMileage} allowedLength={10} onChange={(e) => setFilters({ ...filters, minMileage: e.target.value })} maxWidth={0.4} /> 
-                            <CustomTextField label={"До"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.maxMileage} allowedLength={10} onChange={(e) => setFilters({ ...filters, maxMileage: e.target.value })} maxWidth={0.4} /> 
+                            <CustomTextField label={"От"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('minMileage')} maxWidth={'40%'} /> 
+                            <CustomTextField label={"До"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('maxMileage')} maxWidth={'40%'} /> 
                         </div>
                     </div>
-                    <SelectTextField label={"Состояние"} value={filters.carState} id={"car-state-input"} htmlFor={"car-state-input"} list={allowedCarStates} onChange={(e) => setFilters({ ...filters, carState: e.target.value })} />
+                    <SelectTextField label={"Состояние"} id={"car-state-input"} htmlFor={"car-state-input"} list={allowedCarStates} onChange={handleFilterChange('carState')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Экстерьер</span>
                     </div>
-                    <CheckBox label={"Рейлинги на крыше"} id={"roof-rails-check"} checked={filters.roofRails} onChange={(e) => setFilters({ ...filters, roofRails: e.target.checked })} />
-                    <CheckBox label={"Фаркоп"} id={"tow-bar-check"} checked={filters.towBar} onChange={(e) => setFilters({ ...filters, towBar: e.target.checked })} />
+                    <CheckBox label={"Рейлинги на крыше"} id={"roof-rails-check"} onChange={handleCheckBoxFilterChange('roofRails')} />
+                    <CheckBox label={"Фаркоп"} id={"tow-bar-check"} onChange={handleCheckBoxFilterChange('towBar')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Интерьер</span>
                     </div>
-                    <CheckBox label={"Люк"} id={"sun-roof-check"} checked={filters.sunRoof} onChange={(e) => setFilters({ ...filters, sunRoof: e.target.checked })} />
-                    <CheckBox label={"Панорамная крыша"} id={"panoramic-roof-check"} checked={filters.panoramicRoof} onChange={(e) => setFilters({ ...filters, panoramicRoof: e.target.checked })} />
+                    <CheckBox label={"Люк"} id={"sun-roof-check"} onChange={handleCheckBoxFilterChange('sunRoof')} />
+                    <CheckBox label={"Панорамная крыша"} id={"panoramic-roof-check"} onChange={handleCheckBoxFilterChange('panoramicRoof')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Системы помощи</span>
                     </div>
-                    <CheckBox label={"Датчик дождя"} id={"rain-sensor-check"} checked={filters.rainSensor} onChange={(e) => setFilters({ ...filters, rainSensor: e.target.checked })} />
-                    <CheckBox label={"Камера заднего вида"} id={"rear-view-camera-check"} checked={filters.rearViewCamera} onChange={(e) => setFilters({ ...filters, rearViewCamera: e.target.checked })} />
-                    <CheckBox label={"Парктроники"} id={"parking-sensors-check"} checked={filters.parkingSensors} onChange={(e) => setFilters({ ...filters, parkingSensors: e.target.checked })} />
-                    <CheckBox label={"Контроль мёртвых зон"} id={"blind-spot-sensor-check"} checked={filters.blindSpotSensor} onChange={(e) => setFilters({ ...filters, blindSpotSensor: e.target.checked })} />
+                    <CheckBox label={"Датчик дождя"} id={"rain-sensor-check"} onChange={handleCheckBoxFilterChange('rainSensor')} />
+                    <CheckBox label={"Камера заднего вида"} id={"rear-view-camera-check"} onChange={handleCheckBoxFilterChange('rearViewCamera')} />
+                    <CheckBox label={"Парктроники"} id={"parking-sensors-check"} onChange={handleCheckBoxFilterChange('parkingSensors')} />
+                    <CheckBox label={"Контроль мёртвых зон"} id={"blind-spot-sensor-check"} onChange={handleCheckBoxFilterChange('blindSpotSensor')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Обогрев</span>
                     </div>
-                    <CheckBox label={"Сидений"} id={"heated-seats-check"} checked={filters.heatedSeats} onChange={(e) => setFilters({ ...filters, heatedSeats: e.target.checked })} />
-                    <CheckBox label={"Лобового стекла"} id={"heated-windshield-check"} checked={filters.heatedWindshield} onChange={(e) => setFilters({ ...filters, heatedWindshield: e.target.checked })} />
-                    <CheckBox label={"Зеркал"} id={"heated-mirrors-check"} checked={filters.heatedMirrors} onChange={(e) => setFilters({ ...filters, heatedMirrors: e.target.checked })} />
-                    <CheckBox label={"Руля"} id={"heated-steering-wheel-check"} checked={filters.heatedSteeringWheel} onChange={(e) => setFilters({ ...filters, heatedSteeringWheel: e.target.checked })} />
-                    <CheckBox label={"Автономный отопитель"} id={"autonomous-heater-check"} checked={filters.autonomousHeater} onChange={(e) => setFilters({ ...filters, autonomousHeater: e.target.checked })} />
+                    <CheckBox label={"Сидений"} id={"heated-seats-check"} onChange={handleCheckBoxFilterChange('heatedSeats')} />
+                    <CheckBox label={"Лобового стекла"} id={"heated-windshield-check"} onChange={handleCheckBoxFilterChange('heatedWindshield')} />
+                    <CheckBox label={"Зеркал"} id={"heated-mirrors-check"} onChange={handleCheckBoxFilterChange('heatedMirrors')} />
+                    <CheckBox label={"Руля"} id={"heated-steering-wheel-check"} onChange={handleCheckBoxFilterChange('heatedSteeringWheel')} />
+                    <CheckBox label={"Автономный отопитель"} id={"autonomous-heater-check"} onChange={handleCheckBoxFilterChange('autonomousHeater')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Климат</span>
                     </div>
-                    <CheckBox label={"Климат-контроль"} id={"climate-control-check"} checked={filters.climateControl} onChange={(e) => setFilters({ ...filters, climateControl: e.target.checked })} />
-                    <CheckBox label={"Кондиционер"} id={"air-conditioner-check"} checked={filters.airConditioner} onChange={(e) => setFilters({ ...filters, airConditioner: e.target.checked })} />
+                    <CheckBox label={"Климат-контроль"} id={"climate-control-check"} onChange={handleCheckBoxFilterChange('climateControl')} />
+                    <CheckBox label={"Кондиционер"} id={"air-conditioner-check"} onChange={handleCheckBoxFilterChange('airConditioner')} />
                 </div>
                 <div style={{ width: OTHER_FILTER_PART_WIDTH }} className="otherFiltersPartDiv">
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Комфорт</span>
                     </div>
-                    <CheckBox label={"Круиз-контроль"} id={"cruise-control-check"} checked={filters.cruiseControl} onChange={(e) => setFilters({ ...filters, cruiseControl: e.target.checked })} />
-                    <CheckBox label={"Управление мультимедиа с руля"} id={"steering-wheel-multimedia-check"} checked={filters.steeringWheelMultimedia} onChange={(e) => setFilters({ ...filters, steeringWheelMultimedia: e.target.checked })} />
-                    <CheckBox label={"Электрорегулировка сидений"} id={"electric-seats-check"} checked={filters.electricSeats} onChange={(e) => setFilters({ ...filters, electricSeats: e.target.checked })} />
-                    <CheckBox label={"Передние электро-стеклоподъёмники"} id={"front-electro-windows-check"} checked={filters.frontElectroWindows} onChange={(e) => setFilters({ ...filters, frontElectroWindows: e.target.checked })} />
-                    <CheckBox label={"Задние электро-стеклоподъёмники"} id={"rear-electro-windows-check"} checked={filters.rearElectroWindows} onChange={(e) => setFilters({ ...filters, rearElectroWindows: e.target.checked })} />
+                    <CheckBox label={"Круиз-контроль"} id={"cruise-control-check"} onChange={handleCheckBoxFilterChange('cruiseControl')} />
+                    <CheckBox label={"Управление мультимедиа с руля"} id={"steering-wheel-multimedia-check"} onChange={handleCheckBoxFilterChange('steeringWheelMultimedia')} />
+                    <CheckBox label={"Электрорегулировка сидений"} id={"electric-seats-check"} onChange={handleCheckBoxFilterChange('electricSeats')} />
+                    <CheckBox label={"Передние электро-стеклоподъёмники"} id={"front-electro-windows-check"} onChange={handleCheckBoxFilterChange('frontElectroWindows')} />
+                    <CheckBox label={"Задние электро-стеклоподъёмники"} id={"rear-electro-windows-check"} onChange={handleCheckBoxFilterChange('rearElectroWindows')} />
                 </div>
                 <div style={{ width: WIDE_OTHER_FILTER_PART_WIDTH, flexDirection: 'row', justifyContent: 'space-between' }} className="otherFiltersPartDiv">
                     <div className="filterRow">
@@ -197,29 +209,29 @@ const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
                     <div style={{ width: '45%' }} className="filterRow">
                         <span>Год</span>
                         <div>
-                            <CustomTextField label={"От"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.minYear} allowedLength={4} onChange={(e) => setFilters({ ...filters, minYear: e.target.value })} maxWidth={0.4} /> 
-                            <CustomTextField label={"До"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.maxYear} allowedLength={4} onChange={(e) => setFilters({ ...filters, maxYear: e.target.value })} maxWidth={0.4} /> 
+                            <CustomTextField label={"От"} autoComplete={"off"} onlyNumbers={true} allowedLength={4} onChange={handleFilterChange('minYear')} maxWidth={'40%'} /> 
+                            <CustomTextField label={"До"} autoComplete={"off"} onlyNumbers={true} allowedLength={4} onChange={handleFilterChange('maxYear')} maxWidth={'40%'} /> 
                         </div>
                     </div>
                     <div style={{ width: '45%' }} className="filterRow">
                         <span>Цена</span>
                         <div>
-                            <CustomTextField label={"От"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.minPrice} allowedLength={10} onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })} maxWidth={0.4} /> 
-                            <CustomTextField label={"До"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.maxPrice} allowedLength={10} onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })} maxWidth={0.4} /> 
+                            <CustomTextField label={"От"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('minPrice')} maxWidth={'40%'} /> 
+                            <CustomTextField label={"До"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('maxPrice')} maxWidth={'40%'} /> 
                         </div>
                     </div>
                     <div style={{ width: '45%' }} className="filterRow">
                         <span>Объем</span>
                         <div>
-                            <SelectTextField label={"От"} align={"center"} value={filters.minEngineVolume} id={"min-ev-input"} htmlFor={"min-ev-input"} list={allowedEngineVolumes} onChange={(e) => setFilters({ ...filters, minEngineVolume: e.target.value })} maxWidth={0.4} />
-                            <SelectTextField label={"До"} align={"center"} value={filters.maxEngineVolume} id={"max-ev-input"} htmlFor={"max-ev-input"} list={allowedEngineVolumes} onChange={(e) => setFilters({ ...filters, maxEngineVolume: e.target.value })} maxWidth={0.4} />
+                            <SelectTextField label={"От"} id={"min-ev-input"} htmlFor={"min-ev-input"} list={allowedEngineVolumes} onChange={handleFilterChange('minEngineVolume')} maxWidth={'40%'} />
+                            <SelectTextField label={"До"} id={"max-ev-input"} htmlFor={"max-ev-input"} list={allowedEngineVolumes} onChange={handleFilterChange('maxEngineVolume')} maxWidth={'40%'} />
                         </div>
                     </div>
                     <div style={{ width: '45%' }} className="filterRow">
                         <span>Мощность</span>
                         <div>
-                            <CustomTextField label={"От"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.minEnginePower} allowedLength={10} onChange={(e) => setFilters({ ...filters, minEnginePower: e.target.value })} maxWidth={0.4} /> 
-                            <CustomTextField label={"До"} align={"center"} autoComplete={"off"} onlyNumbers={true} field={filters.maxEnginePower} allowedLength={10} onChange={(e) => setFilters({ ...filters, maxEnginePower: e.target.value })} maxWidth={0.4} /> 
+                            <CustomTextField label={"От"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('minEnginePower')} maxWidth={'40%'} /> 
+                            <CustomTextField label={"До"} autoComplete={"off"} onlyNumbers={true} allowedLength={10} onChange={handleFilterChange('maxEnginePower')} maxWidth={'40%'} /> 
                         </div>
                     </div>
                 </div>
@@ -227,12 +239,12 @@ const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
                     <div className="filterRow">
                         <span style={{ textAlign: "center", paddingLeft: 0 }} >Системы безопасности</span>
                     </div>
-                    <CheckBox label={"ABS"} id={"abs-check"} checked={filters.abs} onChange={(e) => setFilters({ ...filters, abs: e.target.checked })} width={"45%"} />
-                    <CheckBox label={"ESP"} id={"esp-check"} checked={filters.esp} onChange={(e) => setFilters({ ...filters, esp: e.target.checked })} width={"45%"} />
-                    <CheckBox label={"ASR"} id={"asr-check"} checked={filters.asr} onChange={(e) => setFilters({ ...filters, asr: e.target.checked })} width={"45%"} />
-                    <CheckBox label={"Иммобилайзер"} id={"immobilizer-check"} checked={filters.immobilizer} onChange={(e) => setFilters({ ...filters, immobilizer: e.target.checked })} width={"45%"} />
-                    <CheckBox label={"Сигнализация"} id={"signaling-check"} checked={filters.signaling} onChange={(e) => setFilters({ ...filters, signaling: e.target.checked })} width={"45%"} />
-                    <CheckBox label={"Подушки безопасности"} id={"airbags-check"} checked={filters.airBags} onChange={(e) => setFilters({ ...filters, airBags: e.target.checked })} width={"45%"} />
+                    <CheckBox label={"ABS"} id={"abs-check"} onChange={handleCheckBoxFilterChange('abs')} width={"45%"} />
+                    <CheckBox label={"ESP"} id={"esp-check"} onChange={handleCheckBoxFilterChange('esp')} width={"45%"} />
+                    <CheckBox label={"ASR"} id={"asr-check"} onChange={handleCheckBoxFilterChange('asr')} width={"45%"} />
+                    <CheckBox label={"Иммобилайзер"} id={"immobilizer-check"} onChange={handleCheckBoxFilterChange('immobilizer')} width={"45%"} />
+                    <CheckBox label={"Сигнализация"} id={"signaling-check"} onChange={handleCheckBoxFilterChange('signaling')} width={"45%"} />
+                    <CheckBox label={"Подушки безопасности"} id={"airbags-check"} onChange={handleCheckBoxFilterChange('airBags')} width={"45%"} />
                 </div>
             </div>
         </div>
@@ -242,7 +254,7 @@ const WIDE_OTHER_FILTER_PART_WIDTH = '48%';
 export default OtherFilters;
 
 OtherFilters.propTypes = {
-    filters: PropTypes.shape({
+    filtersRef: PropTypes.shape({
         maxPrice: PropTypes.string,
         maxEngineVolume: PropTypes.string,
         transmissionType: PropTypes.string,
@@ -296,5 +308,4 @@ OtherFilters.propTypes = {
         immobilizer: PropTypes.bool,
         signaling: PropTypes.bool
     }),
-    setFilters: PropTypes.func.isRequired
-}
+};

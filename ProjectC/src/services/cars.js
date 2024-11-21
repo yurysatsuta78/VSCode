@@ -9,13 +9,11 @@ export const getCarsAmount = async () => {
     }
 }
 
-export const getFiltredCars = async(filters, skip, take) => {
+export const getFiltredCars = async(filters) => {
     try{
         const filtersToServer = Object.fromEntries(
             Object.entries(filters).map(([key, value]) => [key, value === '' ? null : value])
         );
-        filtersToServer.skip = skip;
-        filtersToServer.take = take;
         var responce = await axios.post('https://localhost:7208/Cars/filtred', filtersToServer);
         return responce.data;
     } catch (e){

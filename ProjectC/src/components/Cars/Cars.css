@@ -3,7 +3,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    width: 55%;
+    width: 60%;
     height: 220px;
     border: 2px solid rgba(255, 255, 255, 0.5);
     background-color: transparent;
@@ -13,6 +13,23 @@
     overflow: hidden;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.emptyCarBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 220px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    border-radius: 20px;
+    cursor: default;
+    pointer-events: none;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--primary-font);
+    font-size: 17px;
 }
 
 .carBtn:hover{
