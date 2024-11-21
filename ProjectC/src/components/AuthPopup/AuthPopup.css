@@ -34,15 +34,16 @@
     background-color: rgba(36, 36, 36, 0.6);
     min-width: 420px;
     max-width: 420px;
-    height: 500px;  
+    height: auto;  
     display: flex;
     flex-direction: column;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     transform: scale(0);
     transform-origin: center center;
     animation: zoomIn 0.3s forwards;
-    padding: 15px;
+    padding: 10px 15px 20px 15px;
     box-sizing: border-box;
 }
 
@@ -50,6 +51,7 @@
     display: flex;
     width: 100%;
     height: 40px;
+    min-height: 40px;
     position: relative;
 }
 
@@ -89,11 +91,50 @@
     z-index: 1002;
 }
 
-.auth-form{
-    width: 100%;
+.auth-window{
     height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.all-form-container{
+    display: flex;
+    height: 100%;
+    min-width: 100%;
+}
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-    margin-top: 10px;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.auth-form-btn{
+    width: 95%;
+    height: 35px;
+    margin-top: 30px;
+    background-color: transparent;
+    border: 2px solid #ffffff80;
+    border-radius: 5px;
+    color: white;
+    font-family: var(--primary-font);
+    cursor: pointer;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.auth-form-btn:hover{
+    border-color: white;
+ }
+ 
+ .auth-form-btn:focus{
+    border-color: #ffffff;
+ }
+
+input:-webkit-autofill {
+    box-shadow: inset 20px 20px 0px 20px rgba(36, 36, 36, 0.6);
 }
 
 @keyframes zoomIn {

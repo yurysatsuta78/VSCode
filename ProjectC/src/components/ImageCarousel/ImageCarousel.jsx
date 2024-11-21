@@ -40,7 +40,7 @@ const handleRightClick = () => {
                 >
                     {
                         images.map((image, index) => (
-                            <div key={index} style={{ minWidth: '100%', maxWidth: '100%' , backgroundColor: 'purple' }} >
+                            <div key={index} style={{ minWidth: '100%', maxWidth: '100%' }} >
                                 <img className="carousel-image" src={`${serverUrl}${image.imageUrl}`} alt={index} ></img>
                             </div>
                         ))
