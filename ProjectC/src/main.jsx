@@ -9,5 +9,4 @@ ReactDOM.createRoot(document.getElementById("app")).render(
         <UserProvider>
             <App />
         </UserProvider>
-    </StyledEngineProvider>
 );

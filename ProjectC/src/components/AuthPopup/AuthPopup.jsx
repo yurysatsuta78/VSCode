@@ -75,6 +75,11 @@ const FORM_WIDTH = 390;
 const FORM_MARGINS = 30;
 const FORM_OFFSET = FORM_WIDTH + FORM_MARGINS;
 
+
+const FORM_WIDTH = 390;
+const FORM_MARGINS = 30;
+const FORM_OFFSET = FORM_WIDTH + FORM_MARGINS;
+
 useEffect(() => {
     if (openPopup) {
       setIsVisible(true);
