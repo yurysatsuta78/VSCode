@@ -47,6 +47,7 @@ console.log("CarPopup_rendered");
                     <div style={{ justifyContent: "end" }}>
                         <span style={{ fontSize: 15, left: 0, bottom: 0 }} className="carSpan">{selectedCar.price}$</span>
                         <span style={{ fontSize: 15, color: '#ffffff80' }} className="carSpan">{selectedCar.regionName}, {selectedCar.cityName}</span>
+                        <span style={{ fontSize: 15, color: '#ffffff80' }} className="carSpan">{selectedCar.phoneNumber}</span>
                     </div>
                   </div>
                 </div>
@@ -174,6 +175,7 @@ CarPopup.propTypes = {
     brandName: PropTypes.string.isRequired,
     cityName: PropTypes.string.isRequired,
     regionName: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(
       PropTypes.shape({
         imageUrl: PropTypes.string,
@@ -181,5 +183,4 @@ CarPopup.propTypes = {
     ).isRequired,
   }),
   handleClosePopup: PropTypes.func.isRequired,
-  serverUrl: PropTypes.string.isRequired,
 };

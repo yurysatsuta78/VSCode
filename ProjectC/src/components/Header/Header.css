@@ -12,7 +12,7 @@
  .logo-div{
     width: 100px;
     height: 100%;
-    background-color: blue;
+    background-color: gray;
  }
 
  .nav-div{
@@ -38,7 +38,7 @@
     height: 70%;
  }
  
- .auth-btn{
+ .auth-btn, .logout-btn{
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -51,10 +51,15 @@
     font-size: 14px;
  }
 
+.logout-btn:hover{
+   border-color: rgb(241, 159, 159);
+   color: rgba(255, 44, 44, 0.645);
+}
+
  .auth-btn:hover{
     border-color: white;
     color: var(--yellow-color);
- }
+}
 
  .nav-btn{
    width: 48%;
