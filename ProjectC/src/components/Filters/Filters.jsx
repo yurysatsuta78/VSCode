@@ -52,8 +52,6 @@ useEffect(() => {
     };
 }, []);
 
-console.log('Filters_Rendered');
-
     return (
         <div className='filtersContainer' ref={filtersRef}>
             <BMGFilters enableAnimations={enableAnimations} />

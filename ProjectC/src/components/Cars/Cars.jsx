@@ -30,8 +30,6 @@ const getMore = async () => {
             <button className="emptyCarBtn">Пусто</button>
             <button className="emptyCarBtn">Пусто</button>
             <button className="emptyCarBtn">Пусто</button>
-            <button className="emptyCarBtn">Пусто</button>
-            <button className="emptyCarBtn">Пусто</button>
             <span style={{ width: '100%' }} className="rightTitle"></span>
         </div>
     )
